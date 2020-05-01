@@ -1,0 +1,24 @@
+import radiomics
+import radiomics.featureextractor as FEE
+import csv
+ori_path=r'C:\Users\79943\Desktop\shixuewei\mri nii\data\image.nii'
+lab_path=r'C:\Users\79943\Desktop\shixuewei\mri nii\data\Segmentation.seg.nrrd'
+para_path=r'C:\Users\79943\Desktop\shixuewei\mri nii\data\param.yaml'
+#初始化特征提取器
+extractor= FEE.RadiomicsFeatureExtractor(para_path)
+print("Extraction parameters:\n\t",extractor.settings)
+print("Enabled filters:\n\t",extractor.enabledImagetypes)
+print("Enabled features:\n\t",extractor.enabledFeatures)
+#提取特征
+result= extractor.execute(ori_path, lab_path)
+#print("Result type:",type(result))
+#print("")
+#print("Calculted features")
+#for key, value in result.items():
+#    print("\t",key,":",value)
+with open(r"C:\Users\79943\Desktop\shixuewei\mri nii\data\result.csv","w",newline="") as csv_file:
+    writer=csv.writer(csv_file)
+    for key, value in result.items():
+        writer.writerow([key,value])
+    
+    
