@@ -1,0 +1,102 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Sun Jun  7 15:29:20 2020
+
+@author: 79943
+"""
+
+import radiomics.featureextractor as FEE
+import csv
+
+def T1c():
+    ori_path=r'E:\meningioma\No.41fuxian3504729\New Folder\t1c co.nrrd'
+    lab_path=r'E:\meningioma\No.41fuxian3504729\New Folder\Segmentation.seg.nrrd'
+    para_path=r'F:\radiomics\Pyradiomics\特征提取\param.yaml'
+    #初始化特征提取器
+    extractor= FEE.RadiomicsFeatureExtractor(para_path)
+    # print("Extraction parameters:\n\t",extractor.settings)
+    # print("Enabled filters:\n\t",extractor.enabledImagetypes)
+    # print("Enabled features:\n\t",extractor.enabledFeatures)
+    #提取特征
+    result= extractor.execute(ori_path, lab_path)
+    #整理需要保存的特征
+    feature=list()
+    for key,value in result.items():
+        feature.append(key)
+    del feature[0:37]
+        
+    with open(r"E:\meningioma\No.41fuxian3504729.csv","a+",newline="") as csv_file:
+        writer=csv.writer(csv_file)
+        for i in feature:
+            writer.writerow(["T1c_"+i,result[i]])
+            
+def T2():
+    ori_path=r'E:\meningioma\No.41fuxian3504729\New Folder\t2 re co.nrrd'
+    lab_path=r'E:\meningioma\No.41fuxian3504729\New Folder\Segmentation.seg.nrrd'
+    para_path=r'F:\radiomics\Pyradiomics\特征提取\param.yaml'
+    #初始化特征提取器
+    extractor= FEE.RadiomicsFeatureExtractor(para_path)
+    # print("Extraction parameters:\n\t",extractor.settings)
+    # print("Enabled filters:\n\t",extractor.enabledImagetypes)
+    # print("Enabled features:\n\t",extractor.enabledFeatures)
+    #提取特征
+    result= extractor.execute(ori_path, lab_path)
+    #整理需要保存的特征
+    feature=list()
+    for key,value in result.items():
+        feature.append(key)
+    del feature[0:37]
+    
+    with open(r"E:\meningioma\No.41fuxian3504729.csv","a+",newline="") as csv_file:
+        writer=csv.writer(csv_file)
+        for i in feature:
+            writer.writerow(["T2_"+i,result[i]])
+
+def T2flair():
+    ori_path=r'E:\meningioma\No.41fuxian3504729\New Folder\t2f re co.nrrd'
+    lab_path=r'E:\meningioma\No.41fuxian3504729\New Folder\Segmentation.seg.nrrd'
+    para_path=r'F:\radiomics\Pyradiomics\特征提取\param.yaml'
+    #初始化特征提取器
+    extractor= FEE.RadiomicsFeatureExtractor(para_path)
+    # print("Extraction parameters:\n\t",extractor.settings)
+    # print("Enabled filters:\n\t",extractor.enabledImagetypes)
+    # print("Enabled features:\n\t",extractor.enabledFeatures)
+    #提取特征
+    result= extractor.execute(ori_path, lab_path) 
+    #整理需要保存的特征
+    feature=list()
+    for key,value in result.items():
+        feature.append(key)
+    del feature[0:37]
+    
+    with open(r"E:\meningioma\No.41fuxian3504729.csv","a+",newline="") as csv_file:
+        writer=csv.writer(csv_file)
+        for i in feature:
+            writer.writerow(["T2flair_"+i,result[i]])
+            
+def ADC():
+    ori_path=r'E:\meningioma\No.41fuxian3504729\New Folder\adc re.nrrd'
+    lab_path=r'E:\meningioma\No.41fuxian3504729\New Folder\Segmentation.seg.nrrd'
+    para_path=r'F:\radiomics\Pyradiomics\特征提取\param_without normalize.yaml'
+    #初始化特征提取器
+    extractor= FEE.RadiomicsFeatureExtractor(para_path)
+    # print("Extraction parameters:\n\t",extractor.settings)
+    # print("Enabled filters:\n\t",extractor.enabledImagetypes)
+    # print("Enabled features:\n\t",extractor.enabledFeatures)
+    #提取特征
+    result= extractor.execute(ori_path, lab_path)
+    #整理需要保存的特征
+    feature=list()
+    for key,value in result.items():
+        feature.append(key)
+    del feature[0:37]
+    
+    with open(r"E:\meningioma\No.41fuxian3504729.csv","a+",newline="") as csv_file:
+        writer=csv.writer(csv_file)
+        for i in feature:
+            writer.writerow(["ADC_"+i,result[i]])
+
+T1c()
+T2()
+T2flair()
+ADC()
